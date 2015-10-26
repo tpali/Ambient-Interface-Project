@@ -1,0 +1,48 @@
+.thumbnail {
+    margin-bottom: 0;
+}
+
+.thumbnail h3 {
+    margin: 5px;
+    padding: 5px;
+}
+
+.thumbnail img {
+    border: 2px solid #000000;
+    padding: 2px;
+}
+
+.about_project {
+    display: block;
+    border: 2px solid #000000;
+    background-color: #7f7f7f;
+    padding: 10px;
+    margin: 5px;
+}
+
+
+.about_project p {
+    font-size: 12px;
+}
+
+.aboout_project li {
+    font-size: 12px;
+}
+
+.functions {
+    display: block;
+    border: 2px solid #000000;
+    color: #545454;
+    background-color: #f8f8ff;
+    padding: 10px;
+    margin: 5px;
+}
+
+.functions li {
+    font-size: 12px;
+}
+
+.functions p {
+    font-weight: bold;
+    font-style: 
+}
