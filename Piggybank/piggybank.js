@@ -5,6 +5,8 @@
  * Thomas Pali
  * Marc Partoriza
  * Jason Ramano
+ *
+ * Test
  */
 
  function Piggybank (name, balance, type, color) {
