@@ -58,8 +58,28 @@
     }
 
 }
+
 //Running and testing basic
 var pb = new PiggyBank("Test", 100, "Budget", "Green");
 document.getElementById("currentBalance").innerHTML = pb.balance + " left";
+
+//jQuery
+$("#settingsDialog").dialog({
+   autoOpen: false,
+   buttons: {
+      Confirm: function() {
+         pb.balance = ($("#newBudget").val());
+         document.getElementById("currentBalance").innerHTML = pb.balance + " left";
+         $(this).dialog("close");
+      },
+      Cancel: function () {
+         $(this).dialog("close");
+      }
+   }
+});
+
+$("#settings").click(function () {
+   $("#settingsDialog").dialog("open");
+});
 
 

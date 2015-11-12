@@ -6,6 +6,8 @@
 <head>
 	<title>PiggyBank</title>
 	<link rel="stylesheet" href="webpage.css"/>
+	<script type = "text/javascript" src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script type = "text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 </head>
 
 <body>
@@ -19,8 +21,16 @@
 
 		 <p id="currentBalance"></p>
 
-		<script type="text/javascript" src="piggybank.js"></script>
 
-		<a href="settings.html">Settings</a>
+
+		<!-- Settings button -->
+		<input type="button" id="settings" value="Settings" />
+
+		<div id="settingsDialog">
+			<p>Please enter new budget</p>
+			<textarea id="newBudget"></textarea>
+		</div>
+
+		<script type="text/javascript" src="piggybank.js"></script>
 </body>
 </html>
