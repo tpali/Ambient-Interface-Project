@@ -6,10 +6,10 @@
  * Marc Partoriza
  * Jason Ramano
  *
- * Test
  */
 
- function Piggybank (name, balance, type, color) {
+//Piggybank Class
+ function PiggyBank (name, balance, type, color) {
     this.name = name;
     this.balance = balance;
     this.type = type;
@@ -22,7 +22,7 @@
 
     function getBalance() {
         return this.balance;
-    };
+    }
 
     function getType() {
     	return this.type;
@@ -30,17 +30,26 @@
     function getColor() {
     	return this.color;
     }
-   
+
     ///// Mutation Functions /////
     function changeName(newName) {
     	this.name = newName;
     }
 
-    function changeBalance(newBalance) {
+    //Changed from changeBalance to increaseBalance/decreaseBalance. Thoughts?
+    /*function changeBalance(newBalance) {
     	this.balance = newBalance;
+    }*/
+
+    function increaseBalance(amount){
+       this.balance += amount;
     }
 
-    funciton changeType(newType) {
+    function decreaseBalance(amount){
+       this.balance -= amount;
+    }
+
+    function changeType(newType) {
     	this.type = newType;
     }
 
@@ -48,5 +57,9 @@
     	this.color = newColor;
     }
 
-
 }
+//Running and testing basic
+var pb = new PiggyBank("Test", 100, "Budget", "Green");
+document.getElementById("currentBalance").innerHTML = pb.balance + " left";
+
+
