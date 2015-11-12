@@ -7,7 +7,6 @@
  * Jason Ramano
  *
  */
-
 //Piggybank Class
  function PiggyBank (name, balance, type, color) {
     this.name = name;
