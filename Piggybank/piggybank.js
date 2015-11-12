@@ -66,6 +66,7 @@ document.getElementById("currentBalance").innerHTML = pb.balance + " left";
 //jQuery
 $("#settingsDialog").dialog({
    autoOpen: false,
+   modal: true,
    buttons: {
       Confirm: function() {
          pb.balance = ($("#newBudget").val());
