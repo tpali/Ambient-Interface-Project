@@ -7,6 +7,7 @@
  * Jason Ramano
  *
  */
+
 //Piggybank Class
  function PiggyBank (name, balance, type, color) {
     this.name = name;
@@ -57,6 +58,28 @@
     }
 
 }
+
+//Check in 4 function
+function readURL(URL, cycleTime, range){
+   $.get("data.txt"), function(data){
+      alert(data);
+   }
+
+   //do something with data
+}
+
+$.ajax({
+   url: 'proxy.php',
+   type: 'POST',
+   data: {
+      address: 'http://www.remoudou.co.nf/data.txt'
+   },
+   success: function(response) {
+      alert(response);
+   }
+});
+
+
 
 //Running and testing basic
 var pb = new PiggyBank("Test", 100, "Budget", "Green");
