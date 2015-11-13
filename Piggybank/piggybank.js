@@ -59,14 +59,32 @@
 
 }
 
+function loadFile() {
+    var value = 100;
+    var oFrame = document.getElementById("frmFile");
+    var strRawContents = oFrame.contentWindow.document.body.childNodes[0].innerHTML;
+    while (strRawContents.indexOf("\r") >= 0)
+        strRawContents = strRawContents.replace("\r", "");
+    var arrLines = strRawContents.split("\n");
+
+    for (var i = 0; i < arrLines.length; i++) {
+        var curLine = arrLines[i];
+        //document.getElementById("data").innerHTML += curLine + "</br>";
+        value += parseFloat(curLine);
+    }
+    document.getElementById("data").innerHTML = "New balance after reading from file: " + value;
+}
+
+
+/*
 //Check in 4 function
 function readURL(URL, cycleTime, range){
    $.get("data.txt"), function(data){
       alert(data);
    }
 
-   //do something with data
 }
+
 
 $.ajax({
    url: 'proxy.php',
@@ -78,7 +96,7 @@ $.ajax({
       alert(response);
    }
 });
-
+*/
 
 
 //Running and testing basic

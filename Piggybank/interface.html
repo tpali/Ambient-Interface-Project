@@ -8,8 +8,10 @@
 	<link rel="stylesheet" href="webpage.css"/>
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/black-tie/jquery-ui.css"/>
 	<link rel="stylesheet" href="bootstrap-3.3.5-dist/css/bootstrap.css">
+	<link rel="icon" type="image/png" href="piggy.png">
 	<script type = "text/javascript" src="//code.jquery.com/jquery-2.1.4.js"></script>
 	<script type = "text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<iframe id="frmFile" src="data.txt" onload="loadFile();" style="display: none;"></iframe>
 
 </head>
 <body>
@@ -19,6 +21,7 @@
 			<li><a href="index.html">Home</a></li>
             <li><a href="paperprototype.html">Paper Prototype</a></li>
             <li><a href="interface.html">Interface</a></li>
+            <li><a href="data.txt">Data File</a></li>
 		</ul>
 
 		 <p id="currentBalance"></p>
@@ -26,8 +29,12 @@
 
 
 
+
 		<!-- Settings button -->
 		<input type="button" id="settings" value="Settings" />
+		<FORM>
+			<INPUT Type="button" VALUE="Reload Page" onClick="history.go(0)">
+		</FORM>
 
 		<div id="settingsDialog">
 			<p>Please enter new budget</p>
