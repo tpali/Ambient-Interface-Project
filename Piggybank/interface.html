@@ -11,10 +11,11 @@
 	<link rel="icon" type="image/png" href="piggy.png">
 	<script type = "text/javascript" src="//code.jquery.com/jquery-2.1.4.js"></script>
 	<script type = "text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	<iframe id="frmFile" src="data.txt" onload="loadFile();" style="display: none;"></iframe>
+	<!--iframe id="frmFile" src="http://www.remoudou.co.nf/data.txt" onload="loadFile();" style="display: none;"></iframe-->
+	
 
 </head>
-<body>
+<body runat="server">
 
 
 		<ul class="nav nav-pills">
@@ -24,13 +25,26 @@
             <li><a href="data.txt">Data File</a></li>
 		</ul>
 
-		 <p id="currentBalance"></p>
+		<p id="currentBalance"></p>
 		<p id="data"></p>
 
+		<form id="input" onsubmit="readURL()">
+		  URL:<br>
+		  <input type="text" name="url">
+		  <br>
+		  Cycle Time:<br>
+		  <input type="text" name="cycletime">
+		  <br>
+		  Range:<br>
+		  <input type="text" name="range">
+		  <br>
+		  <input type="submit" value="Submit">
+		</form>
 
 
 
-		<!-- Settings button -->
+
+		<!-- Settings button 
 		<input type="button" id="settings" value="Settings" />
 		<FORM>
 			<INPUT Type="button" VALUE="Reload Page" onClick="history.go(0)">
@@ -40,7 +54,8 @@
 			<p>Please enter new budget</p>
 			<textarea id="newBudget"></textarea>
 		</div>
-
-		<script type="text/javascript" src="piggybank.js"></script>
+		-->
+<script type="text/javascript" src="piggybank.js"></script>
+		
 </body>
 </html>

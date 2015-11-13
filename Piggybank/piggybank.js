@@ -12,6 +12,7 @@
  function PiggyBank (name, balance, type, color) {
     this.name = name;
     this.balance = balance;
+    this.limit = balance;
     this.type = type;
     this.color = color;
 
@@ -36,17 +37,16 @@
     	this.name = newName;
     }
 
-    //Changed from changeBalance to increaseBalance/decreaseBalance. Thoughts?
-    /*function changeBalance(newBalance) {
-    	this.balance = newBalance;
-    }*/
-
     function increaseBalance(amount){
        this.balance += amount;
     }
 
     function decreaseBalance(amount){
        this.balance -= amount;
+    }
+
+    function setLimit(newAmount) {
+        this.limit = newAmount;
     }
 
     function changeType(newType) {
@@ -58,6 +58,7 @@
     }
 
 }
+
 
 function loadFile() {
     var value = 100;
@@ -72,20 +73,47 @@ function loadFile() {
         //document.getElementById("data").innerHTML += curLine + "</br>";
         value += parseFloat(curLine);
     }
-    document.getElementById("data").innerHTML = "New balance after reading from file: " + value;
+   //document.getElementById("data").innerHTML = "New balance after reading from file: $" + value;
 }
 
+
+
+//Check in 4 function
+function readURL(){
+    var input = document.getElementById("input");
+    var URL = input.elements[0].value;
+    var cycleCount = input.elements[1].value;
+    var range = input.elements[2].value;
+    var values;
+    var initialAmount = 100.00;
+    var amount = initialAmount;
+
+
+    $.ajax({
+    type:    "GET",
+    url:     URL,
+    success: function(text) {
+        // `text` is the file text
+        values = text.split("\n");
+
+        for (i = 0; i < values.length; i++) {
+        amount += parseFloat(values[i]);
+        }
+
+    alert("Initial Amount: " + initialAmount + '\n'
+         + "URL: " + URL + '\n'
+         + "Cycle Time: " +  cycleCount + '\n'
+         + "Range: " + range + '\n'
+         + "Updated Amount: " + amount + '\n'
+         + "Updated / Initial * Range: " + ((amount/initialAmount)*range) + '\n');
+    }
+    });
+
+    
+   
+}
 
 /*
-//Check in 4 function
-function readURL(URL, cycleTime, range){
-   $.get("data.txt"), function(data){
-      alert(data);
-   }
-
-}
-
-
 $.ajax({
    url: 'proxy.php',
    type: 'POST',
@@ -98,7 +126,7 @@ $.ajax({
 });
 */
 
-
+/*
 //Running and testing basic
 var pb = new PiggyBank("Test", 100, "Budget", "Green");
 document.getElementById("currentBalance").innerHTML = pb.balance + " left";
@@ -110,7 +138,7 @@ $("#settingsDialog").dialog({
    buttons: {
       Confirm: function() {
          pb.balance = ($("#newBudget").val());
-         document.getElementById("currentBalance").innerHTML = pb.balance + " left";
+         document.getElementById("currentBalance").innerHTML = "$" + pb.balance + " left";
          $(this).dialog("close");
       },
       Cancel: function () {
@@ -122,5 +150,4 @@ $("#settingsDialog").dialog({
 $("#settings").click(function () {
    $("#settingsDialog").dialog("open");
 });
-
-
+*/
