@@ -25,10 +25,12 @@
             <li><a href="data.txt">Data File</a></li>
 		</ul>
 
+		<p id="currentBudget"></p>
 		<p id="currentBalance"></p>
+		<p id="currentType"></p>
 		<p id="data"></p>
 
-		<form id="input" onsubmit="readURL()">
+		<!--<form id="input" onsubmit="readURL()">
 		  URL:<br>
 		  <input type="text" name="url">
 		  <br>
@@ -39,22 +41,31 @@
 		  <input type="text" name="range">
 		  <br>
 		  <input type="submit" value="Submit">
-		</form>
+		</form>-->
 
 
 
 
-		<!-- Settings button 
+		<!-- Settings button -->
 		<input type="button" id="settings" value="Settings" />
 		<FORM>
 			<INPUT Type="button" VALUE="Reload Page" onClick="history.go(0)">
 		</FORM>
 
 		<div id="settingsDialog">
-			<p>Please enter new budget</p>
+			<p><b>Adjust Budget</b></p>
 			<textarea id="newBudget"></textarea>
+			<p><b>Budget Schedule</b></p>
+			<input type="radio" name="budgetSchedule" id="dailySchedule">Daily<br>
+			<input type="radio" name="budgetSchedule" id="weeklySchedule">Weekly<br>
+			<input type="radio" name="budgetSchedule" id="monthlySchedule">Monthly<br>
+			<p><b>Transactions</b></p>
+			<input type="radio" name="transaction" id="depositTransaction">Deposit (+)<br>
+			<input type="radio" name="transaction" id="withdrawTransaction">Withdraw (-)<br>
+			<p><b>Transaction Amount</b></p>
+			<textarea id="newTransaction"></textarea>
 		</div>
-		-->
+
 <script type="text/javascript" src="piggybank.js"></script>
 		
 </body>
