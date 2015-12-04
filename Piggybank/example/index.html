@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+	<script type = "text/javascript" src="jquery-1.11.3.js"></script>
+	<script type = "text/javascript" src="example.js"></script>
+	</head>
+
+<body>
+<p id="balance">Current Balance: $10</p>
+<p id="budget">Current Budget: $100</p>
+<img src="piggy.png" alt="piggybank" id="piggy">
+<br>
+
+<!-- Form for manually updating balance -->
+<form id="newBalance" onSubmit="updateBalance(event)">
+	<input type="text" placeholder="Default Balance = $10"><br>
+	<input type="submit" value="Update Balance!">
+</form>
+
+<!-- Form for manually updating budget -->
+<form id="newBudget" onSubmit="updateBudget(event)">
+	<input type="text" placeholder="Default Budget = $100"><br>
+	<input type="submit" value="Update Budget!">
+</form>
+
+<!--  Submit Form -->
+<form id="input" onsubmit="getSubmit(event)">
+		  <input type="text" placeholder="URL to read transactions">
+		  <br>
+		  <input type="text" placeholder="Default Cycle is 5 secs">
+		  <br>
+		  <!--
+		  <input type="text" placeholder="Default Range is 100">
+		  <br>
+		  -->
+		  <input type="submit" value="Submit">
+</form>
+
+<p id="url" style="display: none;">http://www.remoudou2.co.nf/data.txt</p>
+<p id="range" style="display: none;">100</p>
+<p id="currentBalance" style="display: none;">10</p>
+<p id="currentBudget" style="display: none;">100</p>
+<p id="cycleCount" style="display: none;">5000</p>
+
+</body>
+
+</html>
