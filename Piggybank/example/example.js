@@ -8,7 +8,7 @@ function changePiggy() {
 		document.getElementById("piggy").src = "green.png";
 	} else if (divided <= 0.33) {
 		document.getElementById("piggy").src = "red.png";
-	} else {
+	} else if (divided > 0.33 && divided < 0.66){
 		document.getElementById("piggy").src = "orange.png";
 	}
 	
@@ -22,33 +22,63 @@ function updateBalance(e) {
 	e.preventDefault();
 	var input = document.getElementById("newBalance");
 	var updated = input.elements[0].value;
-	document.getElementById("currentBalance").innerHTML = parseFloat(updated);
-	document.getElementById("budget").innerHTML = "Current Balance: $" + document.getElementById("currentBalance").innerHTML 
+
+	if (updated != "") { 
+		if (updated > 0) {
+		document.getElementById("currentBalance").innerHTML = parseFloat(updated);
+		document.getElementById("balance").innerHTML = "Current Balance: $" + document.getElementById("currentBalance").innerHTML; 
+		} else {
+				alert("ERROR: Pleaser enter positive numbers only.");
+			}
+	} else {
+		alert("ERROR: Field blank.");
+	}
 }
 
 function updateBudget(e) {
 	e.preventDefault();
 	var input = document.getElementById("newBudget");
 	var updated = input.elements[0].value;
-	document.getElementById("currentBudget").innerHTML = parseFloat(updated);
-	document.getElementById("balance").innerHTML = "Current Budget: $" + document.getElementById("currentBalance").innerHTML 
+
+	if (updated != "") { 
+			if (updated > 0) {
+			document.getElementById("currentBudget").innerHTML = parseFloat(updated);
+			document.getElementById("budget").innerHTML = "Current Budget: $" + document.getElementById("currentBudget").innerHTML; 	
+			} else {
+				alert("ERROR: Pleaser enter positive numbers only.");
+			}
+	} else {
+		alert("ERROR: Field blank.");
+	}
 }
 
-
-// Function to update page values based on what the user inputs into Form
-function getSubmit(e) {
+function updateURL(e) {
 	e.preventDefault();
-	var input = document.getElementById("input");
-	 // Add conditionals to check number of elements 
-	 if (input.length == 1) {
-	 document.getElementById("url").innerHTML = input.elements[0].value;
-	} else if (input.length == 2) {
-	 document.getElementById("url").innerHTML = input.elements[0].value;
-	 document.getElementById("cycleCount").innerHTML = 1000 * input.elements[1].value;
-	} else if (input.length == 3) {
-	 document.getElementById("url").innerHTML = input.elements[0].value;
-	 document.getElementById("cycleCount").innerHTML = 1000 * input.elements[1].value;
-	 document.getElementById("range").innerHTML = input.elements[2].value;
+	var input = document.getElementById("newURL");
+	var updated = input.elements[0].value;
+
+	if (updated != "") { 
+		document.getElementById("url").innerHTML = updated;
+		document.getElementById("URL").innerHTML = "Current URL to read from: " + document.getElementById("url").innerHTML; 		
+	} else {
+		alert("ERROR: Field blank.");
+	}
+}
+
+function updateCycle(e) {
+	e.preventDefault();
+	var input = document.getElementById("newCycle");
+	var updated = input.elements[0].value;
+
+	if (updated != "") { 
+			if (updated > 0) {
+			document.getElementById("cycleCount").innerHTML = 1000 * updated;
+			document.getElementById("cycle").innerHTML = "Current Cycle Count (ms): " + document.getElementById("cycleCount").innerHTML; 
+			} else {	
+				alert("ERROR: Pleaser enter positive numbers only.");
+			}
+	} else {
+		alert("ERROR: Field blank.");
 	}
 }
 
@@ -56,12 +86,12 @@ function getSubmit(e) {
 function readURL(){
  //e.preventDefault();
  var values;
- //0.00; for below
- var amount = parseFloat(document.getElementById("currentBalance").innerHTML);
+
+ // UNCOMMENT ONE OF THE FOLLOWING
+ var amount = 0.00;
+ //var amount = parseFloat(document.getElementById("currentBalance").innerHTML);
  var URL = document.getElementById("url").innerHTML;
- //if (document.getElementById("url") != null) {
- 
-//console.log("Amount Before: " + amount);
+
 
  $.ajax({
  type:    "GET",
@@ -74,7 +104,6 @@ function readURL(){
  amount += parseFloat(values[i]);
  }
 
- //console.log("Amount after: " + amount); 
  amount = Math.round(amount * 100) / 100;
 
  document.getElementById("currentBalance").innerHTML = amount;
@@ -85,14 +114,37 @@ function readURL(){
 
  }); // end of .ajax
 
-//} 
+
  
 } // end of readURL()
+
+function checkFields() { 
+	if(document.getElementById("currentBalance").innerHTML == ""
+		|| document.getElementById("currentBudget").innerHTML == ""
+		|| document.getElementById("url").innerHTML == ""
+		|| document.getElementById("cycleCount").innerHTML == "") {
+		alert("ERROR: You are missing one or more field(s)!")
+		return false;
+	} else {
+		return true;
+	}
+}
+
+function start (e) {
+	e.preventDefault();
+
+	if (checkFields()) {
+		changePiggy();
+		periodicycle();
+	} 
+}
  
 // When the page loads start checking the data source
+/*
  $( document ).ready(function() {
  	changePiggy();
  	periodicycle();
  });
+*/
 
   

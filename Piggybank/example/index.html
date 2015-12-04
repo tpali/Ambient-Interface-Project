@@ -7,10 +7,12 @@
 	</head>
 
 <body>
-<p id="balance">Current Balance: $10</p>
-<p id="budget">Current Budget: $100</p>
+<p id="balance">Current Balance: </p>
+<p id="budget">Current Budget: </p>
 <img src="piggy.png" alt="piggybank" id="piggy">
 <br>
+<p id="URL">Current URL to read from: </p>
+<p id="cycle">Current Cycle Count: </p>
 
 <!-- Form for manually updating balance -->
 <form id="newBalance" onSubmit="updateBalance(event)">
@@ -20,28 +22,30 @@
 
 <!-- Form for manually updating budget -->
 <form id="newBudget" onSubmit="updateBudget(event)">
-	<input type="text" placeholder="Default Budget = $100"><br>
+	<input type="text" placeholder="Default Budget = $10"><br>
 	<input type="submit" value="Update Budget!">
 </form>
 
-<!--  Submit Form -->
-<form id="input" onsubmit="getSubmit(event)">
-		  <input type="text" placeholder="URL to read transactions">
-		  <br>
-		  <input type="text" placeholder="Default Cycle is 5 secs">
-		  <br>
-		  <!--
-		  <input type="text" placeholder="Default Range is 100">
-		  <br>
-		  -->
-		  <input type="submit" value="Submit">
+<!-- Form for manually setting URL -->
+<form id="newURL" onSubmit="updateURL(event)">
+	<input type="text" placeholder="URL..."><br>
+	<input type="submit" value="Update URL!">
 </form>
 
-<p id="url" style="display: none;">http://www.remoudou2.co.nf/data.txt</p>
-<p id="range" style="display: none;">100</p>
-<p id="currentBalance" style="display: none;">10</p>
-<p id="currentBudget" style="display: none;">100</p>
-<p id="cycleCount" style="display: none;">5000</p>
+<!-- Form for manually setting cycleCount-->
+<form id="newCycle" onSubmit="updateCycle(event)">
+	<input type="text" placeholder="Cycle Count in seconds..."><br>
+	<input type="submit" value="Update Cycle Count!">
+</form><br>
+
+<!-- Start Interface! -->
+	<input type="button" value="Start!" onClick="start(event);"><br>
+
+
+<p id="url" style="display: none;"></p>
+<p id="currentBalance" style="display: none;"></p>
+<p id="currentBudget" style="display: none;"></p>
+<p id="cycleCount" style="display: none;"></p>
 
 </body>
 
