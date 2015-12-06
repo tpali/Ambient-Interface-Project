@@ -92,12 +92,34 @@ document.getElementById("currentBudget").innerHTML = "Budget: $" + pb.budget;
 document.getElementById("currentBalance").innerHTML = "Current Balance: $" + pb.balance + " left";
 document.getElementById("currentType").innerHTML = "Budget Schedule Type: " + pb.type;
 
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////Test writing to file////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+var xmlhttp;
 
-var fso, fileHandle;
-fso = new ActiveXObject("Scripting.FileSystemObject");
-fileHandle = fso.CreateTextFile(fname, true);
-fileHandle.write(data);
-fileHandle.close();
+//IE7+, Firefox, Chrome, Opera, Safari
+if(window.XMLHttpRequest){
+    xmlhttp = new XMLHttpRequest();
+}
+
+//IE6, IE5
+else{
+    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+}
+
+xmlhttp.onreadystatechange = function(){
+    if (xmlhttp.readyState==4 && xmlhttp.status==200){
+        alert("done");
+    }
+}
+
+xmlhttp.open("POST", "writeToFile.php", true);
+xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+xmlhttp.send("name=Marc");
+
+
+
+
 
 
 
