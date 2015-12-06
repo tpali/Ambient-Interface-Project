@@ -1,3 +1,5 @@
+
+
 /*
  * Piggybank Ambient Interface JavaScript code
  * ICS 414 Team Project
@@ -89,6 +91,16 @@ var pb = new PiggyBank("Test", 100, 100, "Weekly", "Green");
 document.getElementById("currentBudget").innerHTML = "Budget: $" + pb.budget;
 document.getElementById("currentBalance").innerHTML = "Current Balance: $" + pb.balance + " left";
 document.getElementById("currentType").innerHTML = "Budget Schedule Type: " + pb.type;
+
+
+var fso, fileHandle;
+fso = new ActiveXObject("Scripting.FileSystemObject");
+fileHandle = fso.CreateTextFile(fname, true);
+fileHandle.write(data);
+fileHandle.close();
+
+
+
 
 //jQuery
 $("#settingsDialog").dialog({
