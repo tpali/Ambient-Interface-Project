@@ -3,49 +3,79 @@
 
 	<head>
 	<script type = "text/javascript" src="jquery-1.11.3.js"></script>
-	<script type = "text/javascript" src="example.js"></script>
+	<script type = "text/javascript" src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/black-tie/jquery-ui.css"/>
+	<link rel="stylesheet" href="bootstrap-3.3.5-dist/css/bootstrap.css">
+	<script type = "text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<link rel="stylesheet" href="webpage.css"/>
 	</head>
 
 <body>
-<p id="balance">Current Balance: </p>
-<p id="budget">Current Budget: </p>
-<img src="piggy.png" alt="piggybank" id="piggy">
-<br>
-<p id="URL">Current URL to read from: </p>
-<p id="cycle">Current Cycle Count: </p>
+
+<!-- Navigation Bar -->
+<ul class="nav nav-pills">
+			<li><a href="index.html">Interface</a></li>
+            <li><a href="data.txt">Data File</a></li>
+</ul>
+
+<!-- Viewable fields to hold variables -->
+<div id="fields">
+	<p id="balance">Current Balance: </p>
+	<p id="budget">Current Budget: </p>
+	<img src="empty.jpg" alt="piggybank" id="piggy">
+	<p id="URL">Current URL to read from: </p>
+	<p id="cycle">Current Cycle Count: </p>
+</div>
+
+<!-- Settings button -->
+	<input type="button" id="settings" value="Add Transaction" style="visibility: hidden;"/>
+
+<!-- Add transactions dialogue -->
+<div id="settingsDialog">
+   <p><b>Transactions</b></p>
+   <input type="radio" name="transaction" id="depositTransaction">Deposit (+)<br>
+   <input type="radio" name="transaction" id="withdrawTransaction">Withdraw (-)<br>
+   <p><b>Transaction Amount</b></p>
+   <textarea id="newTransaction"></textarea>
+</div>
 
 <!-- Form for manually updating balance -->
 <form id="newBalance" onSubmit="updateBalance(event)">
-	<input type="text" placeholder="Default Balance = $10"><br>
+	<input type="text" placeholder="Default Balance = $10">
 	<input type="submit" value="Update Balance!">
 </form>
 
 <!-- Form for manually updating budget -->
 <form id="newBudget" onSubmit="updateBudget(event)">
-	<input type="text" placeholder="Default Budget = $10"><br>
+	<input type="text" placeholder="Default Budget = $10">
 	<input type="submit" value="Update Budget!">
 </form>
 
 <!-- Form for manually setting URL -->
 <form id="newURL" onSubmit="updateURL(event)">
-	<input type="text" placeholder="URL..."><br>
+	<input type="text" placeholder="URL...">
 	<input type="submit" value="Update URL!">
 </form>
 
 <!-- Form for manually setting cycleCount-->
 <form id="newCycle" onSubmit="updateCycle(event)">
-	<input type="text" placeholder="Cycle Count in seconds..."><br>
+	<input type="text" placeholder="Cycle count in seconds...">
 	<input type="submit" value="Update Cycle Count!">
 </form><br>
 
 <!-- Start Interface! -->
-	<input type="button" value="Start!" onClick="start(event);"><br>
+<input type="button" id="start" value="Start!" onClick="start(event);"><br>
 
+<!-- Reset Data File --> 
+<input type="button" id="reset" value="Reset Data File" onClick="reset(event)"><br>
 
+<!-- Invisible fields for holding variables -->
 <p id="url" style="display: none;"></p>
 <p id="currentBalance" style="display: none;"></p>
 <p id="currentBudget" style="display: none;"></p>
 <p id="cycleCount" style="display: none;"></p>
+
+<script type = "text/javascript" src="piggybankfinal.js"></script>
 
 </body>
 

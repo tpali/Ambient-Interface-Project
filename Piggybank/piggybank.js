@@ -131,33 +131,14 @@ $("#settingsDialog").dialog({
    buttons: {
       Confirm: function() {
 
-         //////////Updating piggy bank//////////
-         //Updating budget
-         var oldBudget = pb.budget;
-         pb.budget = parseFloat(($("#newBudget").val()));
-
-         //Give an error alert if the user inputted invalid budget (ex: string)
-         if(isNaN(pb.budget)){
-            pb.budget = oldBudget;
-            alert("Invalid Budget Amount");
-         }
-
-         //Updating type
-         //Updates type based on which radio button the user checked.
-         if(document.getElementById("dailySchedule").checked){
-            pb.type = "daily";
-         }
-         else if(document.getElementById("weeklySchedule").checked){
-            pb.type = "weekly";
-         }
-         else if(document.getElementById("monthlySchedule").checked){
-            pb.type = "monthly";
-         }
-
          //Updating Transactions
+
+         //deposit boolean
          var deposit;
+         //float transaction amount
          var transactionAmount;
 
+         //Check if it's a deposit or withdraw
          if(document.getElementById("depositTransaction").checked){
             deposit = true;
          }
@@ -176,14 +157,13 @@ $("#settingsDialog").dialog({
 
          //Apply Transcation to balance
          if(deposit){
-            pb.balance += transactionAmount;
+            //pb.balance += transactionAmount;
+            //deposit transaction function here
          }
-         else { pb.balance -= transactionAmount; }
+         else { //pb.balance -= transactionAmount;
+            //withdraw transaction function here
+            }
 
-         //////////Updating interface//////////
-         document.getElementById("currentType").innerHTML = "Budget Schedule Type: " + pb.type;
-         document.getElementById("currentBudget").innerHTML = "Budget: $" + pb.budget;
-         document.getElementById("currentBalance").innerHTML = "Current Balance: $" + pb.balance + " left";
          $(this).dialog("close");
       },
       Cancel: function () {
