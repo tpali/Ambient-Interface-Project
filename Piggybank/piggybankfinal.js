@@ -16,28 +16,39 @@ function changePiggy() {
 
 	var divided = balance / budget;
 	
-	if (divided == 1.00) {
+	if (divided >= 1.00) {
 		document.getElementById("piggy").src = "full.jpg";
+		document.getElementById("balance").style.color='green';
 	} else if (divided >= 0.90) {
 		document.getElementById("piggy").src = "90pb.jpg";
+		document.getElementById("balance").style.color='green';
 	} else if (divided >= 0.80 && divided < 0.90) {
 		document.getElementById("piggy").src = "80pb.jpg";
+		document.getElementById("balance").style.color='green';
 	} else if (divided >= 0.70 && divided < 0.80){
 		document.getElementById("piggy").src = "70pb.jpg";
+		document.getElementById("balance").style.color='orange';
 	} else if (divided >= 0.60 && divided < 0.70){
 		document.getElementById("piggy").src = "60pb.jpg";
+		document.getElementById("balance").style.color='orange';
 	} else if (divided >= 0.50 && divided < 0.60){
 		document.getElementById("piggy").src = "50pb.jpg";
+		document.getElementById("balance").style.color='orange';
 	} else if (divided >= 0.40 && divided < 0.50){
 		document.getElementById("piggy").src = "40pb.jpg";
+		document.getElementById("balance").style.color='orange';
 	} else if (divided >= 0.30 && divided < 0.40){
 		document.getElementById("piggy").src = "30pb.jpg";
+		document.getElementById("balance").style.color='red';
 	} else if (divided >= 0.20 && divided < 0.30){
 		document.getElementById("piggy").src = "20pb.jpg";
+		document.getElementById("balance").style.color='red';
 	} else if (divided >= 0.10 && divided < 0.20){
 		document.getElementById("piggy").src = "10pb.jpg";
-	} else if (divided == 0){
+		document.getElementById("balance").style.color='red';
+	} else if (divided <= 0){
 		document.getElementById("piggy").src = "empty.jpg";
+		document.getElementById("balance").style.color='red';
 	} 
 	
 }
@@ -62,8 +73,9 @@ function updateBalance(e) {
 		document.getElementById("balance").innerHTML = "Current Balance: $" + document.getElementById("currentBalance").innerHTML;
 		reset(); 
 		writeToFile(updated);
+		document.getElementById("start").style.visibility='visible';
 		} else {
-				alert("ERROR: Pleaser enter positive numbers only.");
+				alert("ERROR: Please enter positive numbers only.");
 			}
 	} else {
 		alert("ERROR: Field blank.");
@@ -81,7 +93,8 @@ function updateBudget(e) {
 	if (updated != "") { 
 			if (updated > 0) {
 			document.getElementById("currentBudget").innerHTML = parseFloat(updated);
-			document.getElementById("budget").innerHTML = "Current Budget: $" + document.getElementById("currentBudget").innerHTML; 	
+			document.getElementById("budget").innerHTML = "Current Budget: $" + document.getElementById("currentBudget").innerHTML; 
+			document.getElementById("newBalance").style.visibility='visible';	
 			} else {
 				alert("ERROR: Pleaser enter positive numbers only.");
 			}
@@ -91,7 +104,7 @@ function updateBudget(e) {
 }
 
 // Function to update the URL through the HTML form
-// Also does minor error checking on the input
+// Validates url or sends an error message
 // e is an event since this function is passed from html through an event
 function updateURL(e) {
 	e.preventDefault();
@@ -99,8 +112,23 @@ function updateURL(e) {
 	var updated = input.elements[0].value;
 
 	if (updated != "") { 
-		document.getElementById("url").innerHTML = updated;
-		document.getElementById("URL").innerHTML = "Current URL to read from: " + document.getElementById("url").innerHTML; 		
+		$.ajax({
+	    url: updated,
+	    type:'GET',
+	    error: function()
+	    {
+	        alert("ERROR: Invalid url");
+	    },
+	    success: function()
+	    {
+		    document.getElementById("url").innerHTML = updated;
+			document.getElementById("URL").innerHTML = "Current URL to read from: " + document.getElementById("url").innerHTML; 	
+			var afterSlash = updated.substr(updated.lastIndexOf("/") + 1, (updated.length - updated.lastIndexOf("/")));	
+			document.getElementById("file").innerHTML = afterSlash;
+			document.getElementById("newCycle").style.visibility='visible';
+	    }
+		});
+
 	} else {
 		alert("ERROR: Field blank.");
 	}
@@ -118,6 +146,7 @@ function updateCycle(e) {
 			if (updated > 0) {
 			document.getElementById("cycleCount").innerHTML = 1000 * updated;
 			document.getElementById("cycle").innerHTML = "Current Cycle Count (ms): " + document.getElementById("cycleCount").innerHTML; 
+			document.getElementById("newBudget").style.visibility='visible';
 			} else {	
 				alert("ERROR: Pleaser enter positive numbers only.");
 			}
@@ -133,7 +162,6 @@ function readURL(){
  var amount = 0.00;
  var URL = document.getElementById("url").innerHTML;
 
-
  $.ajax({
  type:    "GET",
  url:     URL,
@@ -146,6 +174,7 @@ function readURL(){
  }
 
  amount = Math.round(amount * 100) / 100;
+
 
  document.getElementById("currentBalance").innerHTML = amount;
  document.getElementById("balance").innerHTML = "Current Balance: $" + document.getElementById("currentBalance").innerHTML 
@@ -163,6 +192,7 @@ function readURL(){
 } // end of readURL()
 
 // Function to check that the user inputted all of the fields
+// Alerts if the user has not entered any field
 function checkFields() { 
 	if(document.getElementById("currentBalance").innerHTML == ""
 		|| document.getElementById("currentBudget").innerHTML == ""
@@ -215,7 +245,7 @@ function writeToFile(amount) {
 	xmlhttp.open("POST", "writeToFile.php", true);
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	var string = "\n" + amount.toString();
-	xmlhttp.send("amount=" + string);
+	xmlhttp.send("amount=" + string + "&fname=" + document.getElementById("file").innerHTML);
 
 } // end of writeToFile(amount)
 
@@ -242,8 +272,41 @@ function reset(e) {
 		} // end of anonymous function
 	xmlhttp.open("POST", "resetFile.php", true);
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xmlhttp.send("reset=0");
+	xmlhttp.send("reset=0" + "&fname=" + document.getElementById("file").innerHTML);
 
+}
+
+// Function to create a new file from the user's input
+// e is an event because this function is passed through an HTML event
+function createFile(e) {
+	// Stop Javascript from adding hash value to the url
+	e.preventDefault();
+	// Get the inputted filename
+	var input = document.getElementById("newFile");
+	var fileName= input.elements[0].value;
+	var xmlhttp;
+	// Check to see that field is not blank
+	if (fileName != "") {
+	//IE7+, Firefox, Chrome, Opera, Safari
+	if(window.XMLHttpRequest){
+	    xmlhttp = new XMLHttpRequest();
+	}
+	//IE6, IE5
+	else{
+	    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange = function(){
+		    if (xmlhttp.readyState==4 && xmlhttp.status==200){
+		        console.log("CREATED DATA FILE");
+		    }
+		} // end of anonymous function
+	xmlhttp.open("POST", "createFile.php", true);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xmlhttp.send("fileName=" + fileName);
+	alert("FILE CREATED! \nURL: http://www.remoudou2.co.nf/" + fileName +".txt");
+	} else {
+		alert("ERROR: Field blank");
+	}
 }
 
 // This is the event handler for the actual settings dialog
@@ -255,9 +318,7 @@ $("#settingsDialog").dialog({
    modal: true,
    buttons: {
       Confirm: function() {
-
-         //Updating Transactions
-
+         //Updating Transactionsss
          //deposit boolean
          var deposit;
          //float transaction amount
@@ -325,7 +386,9 @@ function fadeFields() {
 	fade(document.getElementById("newCycle"));
 	fade(document.getElementById("newURL"));
 	fade(document.getElementById("start"));
+	fade(document.getElementById("newFile"));
 
 	document.getElementById("settings").style.visibility='visible';
+	document.getElementById("reset").style.visibility='visible';
 }
    

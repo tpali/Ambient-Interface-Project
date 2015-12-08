@@ -1,50 +1,87 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-	<title>PiggyBank</title>
+	<head>
+	<script type = "text/javascript" src="jquery-1.11.3.js"></script>
+	<script type = "text/javascript" src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/black-tie/jquery-ui.css"/>
 	<link rel="stylesheet" href="bootstrap-3.3.5-dist/css/bootstrap.css">
+	<script type = "text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<link rel="stylesheet" href="webpage.css"/>
-        <link rel="icon" type="image/png" href="piggy.png">
-</head>
+	</head>
 
-<body>	
-		<ul class="nav nav-pills">
-			<li><a href="index.html">Home</a></li>
-                        <li><a href="paperprototype.html">Paper Prototype</a></li>
-                        <li><a href="interface.html">Interface</a></li>
-                        <li><a href="data.txt">Data File</a></li>
-		</ul>
-               
-                <div class="thumbnail">
-			<h3>PiggyBank Ambient Interface</h3>
-			<img src="piggybank.png" alt="piggybank">
-		</div>
+<body>
 
-
-	
-<div class="row">
-	<div class="col-md-12">
-		<div class="about_project">
-		<p>
-                Some information about our project....
-		</p>
-                </div>
-        </div>
-
-        <div class="col-md-12">
-                <div class="functions">
-                        <p>Supported Functions:</p>
-                        <ul>
-                                <li>Updating Balance</li>
-                                <li>Updating Name</li>
-                                <li>Updating Color</li>
-                                <li>Updating Type</li>
-                                
-                        </ul>
-                </div>
-        </div>
+<!-- Navigation Bar -->
+<ul class="nav nav-pills">
+		<li><a href="index.html">Interface</a></li>
+</ul>
+s
+<!-- Viewable fields to hold variables -->
+<div id="fields">
+	<p id="URL">Current URL to read from: </p>
+	<p id="cycle">Current Cycle Count: </p>
+	<p id="budget">Current Budget: </p>
+	<p id="balance">Current Balance: </p>
+	<img src="empty.jpg" alt="piggybank" id="piggy">
 </div>
+
+<!-- Settings button -->
+	<input type="button" id="settings" value="Add Transaction" style="visibility: hidden;"/>
+
+<!-- Add transactions dialogue -->
+<div id="settingsDialog">
+   <p><b>Transactions</b></p>
+   <input type="radio" name="transaction" id="depositTransaction">Deposit (+)<br>
+   <input type="radio" name="transaction" id="withdrawTransaction">Withdraw (-)<br>
+   <p><b>Transaction Amount</b></p>
+   <textarea id="newTransaction"></textarea>
+</div>
+
+<!-- Form for manually setting URL -->
+<form id="newURL" onSubmit="updateURL(event)">
+	<input type="text" placeholder="URL...">
+	<input type="submit" value="Update URL!">
+</form>
+
+<!-- Form for manually setting cycleCount-->
+<form id="newCycle" onSubmit="updateCycle(event)" style="visibility: hidden;">
+	<input type="text" placeholder="Cycle count in seconds...">
+	<input type="submit" value="Update Cycle Count!">
+</form>
+
+<!-- Form for manually updating budget -->
+<form id="newBudget" onSubmit="updateBudget(event)" style="visibility: hidden;">
+	<input type="text" placeholder="Enter Budget...">
+	<input type="submit" value="Update Budget!">
+</form>
+
+<!-- Form for manually updating balance -->
+<form id="newBalance" onSubmit="updateBalance(event)" style="visibility: hidden;";>
+	<input type="text" placeholder="Enter Balance...">
+	<input type="submit" value="Update Balance!">
+</form>
+
+<!-- Start Interface! -->
+<input type="button" id="start" value="Start!" onClick="start(event);" style="visibility: hidden;"><br>
+
+<!-- Reset Data File --> 
+<br>
+<input type="button" id="reset" value="Reset Data File" onClick="reset(event)" style="visibility: hidden;"><br>
+
+<!-- Create New Data File --> 
+<form id="newFile" onSubmit="createFile(event);">
+	<input type="text" name="fileName" placeholder="New File Name...">
+	<input type="submit" value="Create Data File"/><br>
+</form>
+
+<!-- Invisible fields for holding variables -->
+<p id="url" style="display: none;"></p>
+<p id="currentBalance" style="display: none;"></p>
+<p id="currentBudget" style="display: none;"></p>
+<p id="cycleCount" style="display: none;"></p>
+<p id="file" style="display:none;"></p>
+<script type = "text/javascript" src="piggybankfinal.js"></script>
 
 </body>
 
