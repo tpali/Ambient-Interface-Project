@@ -7,89 +7,73 @@
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/black-tie/jquery-ui.css"/>
 	<link rel="stylesheet" href="bootstrap-3.3.5-dist/css/bootstrap.css">
 	<script type = "text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-		<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="webpage.css"/>
 	</head>
 
 <body>
 
-
 <!-- Navigation Bar -->
-		<a href="index.html">
-			<img border="0" src="homebutton.png" alt="Home" id="homeButton">
-		</a>
-
-
-<h1 id="title">Ambient-Interface Piggy Bank</h1>
+<ul class="nav nav-pills">
+		<li><a href="index.html">Interface</a></li>
+</ul>
 
 <!-- Viewable fields to hold variables -->
-<div id="wrapper">
+<div id="fields">
+	<p id="URL">Current URL to read from: </p>
+	<p id="cycle">Current Cycle Count: </p>
+	<p id="budget">Current Budget: </p>
+	<p id="balance">Current Balance: </p>
+	<img src="empty.jpg" alt="piggybank" id="piggy">
+</div>
 
-	<div id="piggydiv">
-		<img src="empty.jpg" alt="piggybank" id="piggy">
-	</div>
-	<div id="fields">
-		<p id="URL">Current URL to read from: </p>
-		<p id="cycle">Current Cycle Count: </p>
-		<p id="budget">Current Budget: </p>
-		<p id="balance">Current Balance: </p>
-	</div>
+<!-- Settings button -->
+	<input type="button" id="settings" value="Add Transaction" style="visibility: hidden;"/>
 
-	<!-- Add transactions dialogue -->
-	<div id="formdiv">
-		<div id="settingsDialog">
-			<p><b>Transactions</b></p>
-			<input type="radio" class="inputID" name="transaction" id="depositTransaction">Deposit (+)<br>
-			<input type="radio" class="inputID" name="transaction" id="withdrawTransaction">Withdraw (-)<br><br>
-			<p><b>Transaction Amount</b></p>
-			<textarea id="newTransaction"></textarea>
-		</div>
+<!-- Add transactions dialogue -->
+<div id="settingsDialog">
+   <p><b>Transactions</b></p>
+   <input type="radio" name="transaction" id="depositTransaction">Deposit (+)<br>
+   <input type="radio" name="transaction" id="withdrawTransaction">Withdraw (-)<br>
+   <p><b>Transaction Amount</b></p>
+   <textarea id="newTransaction"></textarea>
+</div>
 
-		<!-- Form for manually setting URL -->
-		<form id="newURL" onSubmit="updateURL(event)">
-			<input class="inputID" type="text" placeholder="URL...">
-			<input class="inputID" type="submit" value="Update URL!">
-		</form>
+<!-- Form for manually setting URL -->
+<form id="newURL" onSubmit="updateURL(event)">
+	<input type="text" placeholder="URL...">
+	<input type="submit" value="Update URL!">
+</form>
 
-		<!-- Form for manually setting cycleCount-->
-		<form id="newCycle" onSubmit="updateCycle(event)" style="visibility: hidden;">
-			<input class="inputID"  type="text" placeholder="Cycle count in seconds...">
-			<input class="inputID" type="submit" value="Update Cycle Count!">
-		</form>
+<!-- Form for manually setting cycleCount-->
+<form id="newCycle" onSubmit="updateCycle(event)" style="visibility: hidden;">
+	<input type="text" placeholder="Cycle count in seconds...">
+	<input type="submit" value="Update Cycle Count!">
+</form>
 
-		<!-- Form for manually updating budget -->
-		<form id="newBudget" onSubmit="updateBudget(event)" style="visibility: hidden;">
-			<input class="inputID" type="text" placeholder="Enter Budget...">
-			<input class="inputID" type="submit" value="Update Budget!">
-		</form>
+<!-- Form for manually updating budget -->
+<form id="newBudget" onSubmit="updateBudget(event)" style="visibility: hidden;">
+	<input type="text" placeholder="Enter Budget...">
+	<input type="submit" value="Update Budget!">
+</form>
 
-		<!-- Form for manually updating balance -->
-		<form id="newBalance" onSubmit="updateBalance(event)" style="visibility: hidden;";>
-			<input class="inputID" type="text" placeholder="Enter Balance...">
-			<input class="inputID" type="submit" value="Update Balance!">
-		</form>
+<!-- Form for manually updating balance -->
+<form id="newBalance" onSubmit="updateBalance(event)" style="visibility: hidden;">
+	<input type="text" placeholder="Enter Balance...">
+	<input type="submit" value="Update Balance!">
+</form>
 
-		<!-- Start Interface! -->
-		<input class="inputID" type="button" id="start" value="Start!" onClick="start(event);" style="visibility: hidden;"><br>
+<!-- Start Interface! -->
+<input type="button" id="start" value="Start!" onClick="start(event);" style="visibility: hidden;"><br>
 
-		<!-- Reset Data File -->
-		<br>
-		<input class="inputID" type="button" id="reset" value="Reset Data File" onClick="reset(event)" style="visibility: hidden;"><br>
+<!-- Reset Data File --> 
+<br>
+<input type="button" id="reset" value="Reset Data File" onClick="reset(event)" style="visibility: hidden;"><br>
 
-		<!-- Create New Data File -->
-		<form id="newFile" onSubmit="createFile(event);">
-			<input class="inputID" type="text" name="fileName" placeholder="New File Name...">
-			<input class="inputID" type="submit" value="Create Data File"/><br>
-		</form>
-
-		<!-- Settings button -->
-		<input type="button" class="inputID" id="settings" value="Add Transaction" style="visibility: hidden;"/>
-	</div>
-	</div>
-
-
-
-
+<!-- Create New Data File --> 
+<form id="newFile" onSubmit="createFile(event);">
+	<input type="text" name="fileName" placeholder="New File Name...">
+	<input type="submit" value="Create Data File"/><br>
+</form>
 
 <!-- Invisible fields for holding variables -->
 <p id="url" style="display: none;"></p>
@@ -97,6 +81,7 @@
 <p id="currentBudget" style="display: none;"></p>
 <p id="cycleCount" style="display: none;"></p>
 <p id="file" style="display:none;"></p>
+<p id="noverwrite" style="display:none;"></p>
 <script type = "text/javascript" src="piggybankfinal.js"></script>
 
 </body>

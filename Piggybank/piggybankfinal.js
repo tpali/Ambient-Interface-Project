@@ -68,15 +68,20 @@ function updateBalance(e) {
 	var updated = input.elements[0].value;
 
 	if (updated != "") { 
-		if (updated >= 0) {
-		document.getElementById("currentBalance").innerHTML = parseFloat(updated);
-		document.getElementById("balance").innerHTML = "Current Balance: $" + document.getElementById("currentBalance").innerHTML;
-		reset(); 
-		writeToFile(updated);
-		document.getElementById("start").style.visibility='visible';
+		if (confirm("Hit OK to overwrite current file, hit CANCEL to use stored values.")) { 
+			if (updated >= 0) {
+			document.getElementById("currentBalance").innerHTML = parseFloat(updated);
+			document.getElementById("balance").innerHTML = "Current Balance: $" + document.getElementById("currentBalance").innerHTML;
+			reset(); 
+			writeToFile(updated);
+			document.getElementById("start").style.visibility='visible';
+			} else {
+					alert("ERROR: Please enter positive numbers only.");
+				}
 		} else {
-				alert("ERROR: Please enter positive numbers only.");
-			}
+			document.getElementById("noverwrite").innerHTML = "TRUE";
+			readURL();
+		}
 	} else {
 		alert("ERROR: Field blank.");
 	}
@@ -90,6 +95,9 @@ function updateBudget(e) {
 	var input = document.getElementById("newBudget");
 	var updated = input.elements[0].value;
 
+	
+	
+
 	if (updated != "") { 
 			if (updated > 0) {
 			document.getElementById("currentBudget").innerHTML = parseFloat(updated);
@@ -101,6 +109,9 @@ function updateBudget(e) {
 	} else {
 		alert("ERROR: Field blank.");
 	}
+
+	
+
 }
 
 // Function to update the URL through the HTML form
@@ -177,8 +188,14 @@ function readURL(){
 
 
  document.getElementById("currentBalance").innerHTML = amount;
- document.getElementById("balance").innerHTML = "Current Balance: $" + document.getElementById("currentBalance").innerHTML 
- changePiggy();
+ document.getElementById("balance").innerHTML = "Current Balance: $" + document.getElementById("currentBalance").innerHTML; 
+ if (document.getElementById("noverwrite").innerHTML == "TRUE") {
+ 	// Do nothing, no color change yet.
+ 	document.getElementById("start").style.visibility='visible';
+ 	document.getElementById("noverwrite").innerHTML = "";
+ } else {
+ 	changePiggy();
+ }
  }, // end of success
  error: function() {
  	alert("ERROR: Invalid URL entered");
