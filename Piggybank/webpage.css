@@ -1,9 +1,62 @@
-p {
+#homeButton{
+	width: 50px;
+	height: 50px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#wrapper {
+	width: 100%;
+	height: 350px;
+	margin: 0 auto;
+
+}
+
+#title{
+	text-align: center;
+	font-family: 'Lato', serif;
+	font-weight: bold;
+}
+
+#piggydiv #fields{
+
+}
+
+#settingsDialog{
+	font-family: 'Lato', serif;
+	font-weight: bold;
+}
+
+.inputID{
+	font-family: 'Lato', serif;
+	font-weight: bold;
+	border-radius: 15px;
+}
+
+#formdiv{
+	float: left;
+	width: 30%;
+
+}
+
+#piggydiv{
+	float: left;
+}
+
+
+#fields{
+	float: left;
+	width: 30% ;
+}
+
+div p {
 	margin-left: 5px;
     padding-left: 5px;
     padding-bottom: 5px;
-    background-color: #A8A8A8;
-    border: 1px solid;
+	font-family: 'Lato', serif;
+	font-weight: bold;
+	font-size: 15px;
 }
 
 img {
@@ -18,6 +71,10 @@ input {
     padding-bottom: 0px;
 }
 
+form{
+	padding-bottom: 5px;
+}
+
 .fields p {
 	padding-left: 5px;
 	margin-left: 5px;
@@ -27,8 +84,7 @@ input {
 	margin-top: 0px;
 }
 
-.fields {
-	margin-bottom: 0px;
-	padding-bottom: 0px;
-}
+
+
+
 
