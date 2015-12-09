@@ -87,7 +87,6 @@ function updateBalance(e) {
 	}
 }
 
-
 // Function to update teh budget through the HTML form
 // Also does error checking on the input
 // e is an event since this function is passed from html through an event
