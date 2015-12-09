@@ -137,6 +137,7 @@ function updateURL(e) {
 			var afterSlash = updated.substr(updated.lastIndexOf("/") + 1, (updated.length - updated.lastIndexOf("/")));	
 			document.getElementById("file").innerHTML = afterSlash;
 			document.getElementById("newCycle").style.visibility='visible';
+			readURL();
 	    }
 		});
 
@@ -188,18 +189,24 @@ function readURL(){
 
 
  document.getElementById("currentBalance").innerHTML = amount;
- document.getElementById("balance").innerHTML = "Current Balance: $" + document.getElementById("currentBalance").innerHTML; 
- if (document.getElementById("noverwrite").innerHTML == "TRUE") {
- 	// Do nothing, no color change yet.
- 	document.getElementById("start").style.visibility='visible';
- 	document.getElementById("noverwrite").innerHTML = "";
+ if (isNaN(document.getElementById("currentBalance").innerHTML)) {
+ 	alert("ERROR: Invalid URL to read from");
+ 	window.location = "http://www.remoudou2.co.nf/index.html";
  } else {
- 	changePiggy();
+		 document.getElementById("balance").innerHTML = "Current Balance: $" + document.getElementById("currentBalance").innerHTML; 
+		 if (document.getElementById("noverwrite").innerHTML == "TRUE") {
+		 	// Do nothing, no color change yet.
+		 	document.getElementById("start").style.visibility='visible';
+		 	document.getElementById("noverwrite").innerHTML = "";
+		 } else {
+ 			changePiggy();
  }
+
+}
  }, // end of success
  error: function() {
  	alert("ERROR: Invalid URL entered");
- 	window.location = "http://www.remoudou2.co.nf/index.html"
+ 	window.location = "http://www.remoudou2.co.nf/index.html";
  }
 
  }); // end of .ajax
